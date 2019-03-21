@@ -1,4 +1,5 @@
 {{ define "main" }}
+
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
@@ -6,10 +7,12 @@
 			{{- with .Params.lead }}
 			<p class="post__lead">{{ . }}</p>
 			{{- end }}
-			{{ with partial "post_meta.html" . -}}
-			<div class="post__meta meta">{{ . }}</div>
+			{{- with .Params.show_post_meta }}
+				{{ with partial "post_meta.html" $ -}}
+				<div class="post__meta meta">{{ . }}</div>
+				{{- end }}
 			{{- end }}
-		</header>
+			</header>
 		{{- if .Params.thumbnail }}
 		<figure class="post__thumbnail">
 			<img src="{{ .Params.thumbnail | relURL }}" alt="{{ .Title }}">
